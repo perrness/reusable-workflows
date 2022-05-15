@@ -2,20 +2,6 @@ name: 'IAC Azure Terraform Plan And Apply'
 
 on:
   workflow_call:
-    inputs:
-    secrets:
-      AZURE_AD_CLIENT_ID:
-        required: true
-        type: string
-      AZURE_AD_CLIENT_ID:
-        required: true
-        type: string
-      AZURE_SUBSCRIPTION_ID:
-        required: true
-        type: string
-      AZURE_AD_TENANT_ID:
-        required: true
-        type: string
 
 jobs:
   plan-and-apply:
