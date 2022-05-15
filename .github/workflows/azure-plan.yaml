@@ -5,7 +5,7 @@ on:
 
 jobs:
   plan:
-    name: 'Terraform Plan'
+    name: 'Plan'
     env:
       ARM_CLIENT_ID: ${{ secrets.AZURE_AD_CLIENT_ID }}
       ARM_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
