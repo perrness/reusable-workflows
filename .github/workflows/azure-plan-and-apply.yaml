@@ -2,6 +2,7 @@ name: 'IAC Azure Terraform Plan And Apply'
 
 on:
   workflow_call:
+    inputs:
     secrets:
       AZURE_AD_CLIENT_ID:
         required: true
@@ -15,10 +16,6 @@ on:
       AZURE_AD_TENANT_ID:
         requried: true
         type: string
-
-permissions:
-      id-token: write
-      contents: read
 
 jobs:
   terraform:
