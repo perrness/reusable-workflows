@@ -2,10 +2,23 @@ name: 'IAC Azure Terraform Plan'
 
 on:
   workflow_call:
+    secrets:
+    AZURE_AD_CLIENT_ID:
+      required: true
+      type: string
+    AZURE_AD_CLIENT_ID:
+      required: true
+      type: string
+    AZURE_SUBSCRIPTION_ID:
+      required: true
+      type: string
+    AZURE_AD_TENANT_ID:
+      required: true
+      type: string
 
 jobs:
-  terraform:
-    name: 'Terraform'
+  plan:
+    name: 'Terraform Plan'
     env:
       ARM_CLIENT_ID: ${{ secrets.AZURE_AD_CLIENT_ID }}
       ARM_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
