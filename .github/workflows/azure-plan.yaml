@@ -2,7 +2,6 @@ name: 'IAC Azure Terraform Plan'
 
 on:
   workflow_call:
-    inputs:
     secrets:
       AZURE_AD_CLIENT_ID:
         required: true
@@ -14,7 +13,7 @@ on:
         required: true
         type: string
       AZURE_AD_TENANT_ID:
-        requried: true
+        required: true
         type: string
 
 jobs:
