@@ -54,5 +54,5 @@ jobs:
 
       - name: Terraform Plan
         id: plan
-        run: terraform plan -input=false
+        run: terraform plan ${{ inputs.terraform_args }}
         continue-on-error: true
