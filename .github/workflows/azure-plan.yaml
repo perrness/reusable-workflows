@@ -42,8 +42,7 @@ jobs:
 
       - name: Terraform Init
         id: init
-        if: ${{ secrets.KV_NAME != null }}
-        run: "terraform init ${{ inputs.terraform_args }} -var="kv_name=${{ secrets.KV_NAME }}" -var="rg_kv_name=${{ RG_KV_NAME }} \\\n 
+        run: "terraform init ${{ inputs.terraform_args }} \\\n 
           -backend-config=\"resource_group_name=${{ secrets.AZURE_BACKEND_RESOURCE_GROUP_NAME }}\" \\\n
           -backend-config=\"storage_account_name=${{ secrets.AZURE_BACKEND_STORAGE_ACCOUNT_NAME }}\" \\\n
           -backend-config=\"container_name=${{ secrets.AZURE_BACKEND_CONTAINER_NAME }}\" \\\n
