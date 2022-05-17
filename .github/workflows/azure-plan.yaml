@@ -6,10 +6,6 @@ on:
       terraform_args:
         required: false
         type: string
-    secrets:
-      KV_NAME:
-        required: false
-        type: string
 
 jobs:
   plan:
