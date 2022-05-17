@@ -55,9 +55,9 @@ jobs:
 
       - name: Terraform Plan
         id: plan
-        run: terraform plan ${{ inputs.terraform_args }}
+        run: terraform plan ${{ inputs.terraform_args }} -input=false
         continue-on-error: true
 
       - name: Terraform Apply
         if: github.ref == 'refs/heads/main'
-        run: terraform apply -auto-approve ${{ inputs.terraform_args }}
+        run: terraform apply ${{ inputs.terraform_args }} -auto-approve -input=false
