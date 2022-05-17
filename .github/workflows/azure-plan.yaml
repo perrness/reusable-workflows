@@ -2,9 +2,10 @@ name: 'IAC Azure Terraform Plan'
 
 on:
   workflow_call:
-    inputs: 
-      required: false
-      terraform_args: string
+    inputs:
+      terraform_args:
+        required: false
+        type: string
 
 jobs:
   plan:
