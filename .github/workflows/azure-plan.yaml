@@ -42,13 +42,12 @@ jobs:
 
       - name: Terraform Init
         id: init
-        env:
-          ${{ inputs.terraform_args }}
         run: "terraform init \\\n 
           -backend-config=\"resource_group_name=${{ secrets.AZURE_BACKEND_RESOURCE_GROUP_NAME }}\" \\\n
           -backend-config=\"storage_account_name=${{ secrets.AZURE_BACKEND_STORAGE_ACCOUNT_NAME }}\" \\\n
           -backend-config=\"container_name=${{ secrets.AZURE_BACKEND_CONTAINER_NAME }}\" \\\n
-          -backend-config=\"key=${{ secrets.AZURE_BACKEND_KEY }}\""
+          -backend-config=\"key=${{ secrets.AZURE_BACKEND_KEY }}\" \\\n
+          ${{ inputs.terraform_args }}\""
       
       - name: Terraform Validate
         id: validate
