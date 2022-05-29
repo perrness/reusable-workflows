@@ -12,7 +12,6 @@ jobs:
     name: 'Plan And Apply'
     env:
       ARM_CLIENT_ID: ${{ secrets.AZURE_AD_CLIENT_ID }}
-      ARM_CLIENT_SECRET: ${{ secrets.AZURE_CLIENT_SECRET }}
       ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
       ARM_TENANT_ID: ${{ secrets.AZURE_AD_TENANT_ID }}
       GITHUB_TOKEN: ${{ secrets.ACTION_TOKEN }}
@@ -48,7 +47,10 @@ jobs:
           -backend-config=\"resource_group_name=${{ secrets.AZURE_BACKEND_RESOURCE_GROUP_NAME }}\" \\\n
           -backend-config=\"storage_account_name=${{ secrets.AZURE_BACKEND_STORAGE_ACCOUNT_NAME }}\" \\\n
           -backend-config=\"container_name=${{ secrets.AZURE_BACKEND_CONTAINER_NAME }}\" \\\n
-          -backend-config=\"key=${{ secrets.AZURE_BACKEND_KEY }}\""
+          -backend-config=\"key=${{ secrets.AZURE_BACKEND_KEY }}\"  \\\n
+          -backend-config=\"use_oidc=true\"  \\\n
+          -backend-config=\"subscription_id=${{ secrets.AZURE_SUBSCRIPTION_ID }}\"  \\\n
+          -backend-config=\"tenant_id=${{ secrets.AZURE_AD_TENANT_ID }}\""
       
       - name: Terraform Validate
         id: validate
