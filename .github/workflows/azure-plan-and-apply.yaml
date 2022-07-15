@@ -64,6 +64,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: ${{ github.sha }}.tfplan
+          path: ${{ github.sha }}.tfplan
 
   apply:
     needs: 
