@@ -26,6 +26,7 @@ jobs:
     defaults:
       run:
         shell: bash
+        working-directory: ${{ inputs.working_directory }}
 
     steps:
       - name: Checkout
@@ -62,7 +63,6 @@ jobs:
 
       - name: Terraform Plan
         id: plan
-        working-directory: ${{ inputs.working_directory }}
         run: terraform plan ${{ inputs.terraform_args }} -input=false -out=${{ github.sha }}.tfplan
       
       - name: Store Terraform plan
