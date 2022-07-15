@@ -65,9 +65,10 @@ jobs:
         with:
           name: ${{ github.sha }}.tfplan
 
-  plan-and-apply:
-    needs: plan
-    name: 'Plan And Apply'
+  apply:
+    needs: 
+     - plan
+    name: 'Apply'
     environment: 'production'
     env:
       ARM_CLIENT_ID: ${{ secrets.AZURE_AD_CLIENT_ID }}
