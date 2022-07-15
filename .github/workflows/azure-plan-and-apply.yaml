@@ -64,7 +64,6 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: ${{ github.sha }}.tfplan
-          path: output/tf/${{ github.sha }}.tfplan
 
   plan-and-apply:
     needs: plan
@@ -112,7 +111,6 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: ${{ github.sha }}.tfplan
-          path: output/tf/${{ github.sha }}.tfplan
 
       - name: Terraform Apply
         if: github.ref == 'refs/heads/main'
