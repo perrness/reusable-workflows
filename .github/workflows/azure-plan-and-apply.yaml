@@ -116,4 +116,4 @@ jobs:
 
       - name: Terraform Apply
         if: github.ref == 'refs/heads/main'
-        run: terraform apply ${{ inputs.terraform_args }} -input=false ${{ github.sha }}.tfplan
+        run: terraform apply -input=false ${{ github.sha }}.tfplan
