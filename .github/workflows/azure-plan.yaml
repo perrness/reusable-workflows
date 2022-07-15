@@ -57,5 +57,10 @@ jobs:
 
       - name: Terraform Plan
         id: plan
-        run: terraform plan ${{ inputs.terraform_args }} -input=false
-        continue-on-error: true
+        run: terraform plan ${{ inputs.terraform_args }} -input=false -out=${{ github.sha }}.tfplan
+      
+      - name: Store Terraform plan
+        uses: actions/upload-artifact@v3
+        with:
+          name: ${{ github.sha }}.tfplan
+          path: output/tf/${{ github.sha }}.tfplan

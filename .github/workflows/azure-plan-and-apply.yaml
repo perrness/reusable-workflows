@@ -29,10 +29,6 @@ jobs:
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v2
 
-      - name: Terraform Format
-        id: fmt
-        run: terraform fmt -check
-
       - name: 'Az CLI login'
         uses: azure/login@v1
         with:
@@ -51,16 +47,12 @@ jobs:
           -backend-config=\"use_oidc=true\"  \\\n
           -backend-config=\"subscription_id=${{ secrets.AZURE_SUBSCRIPTION_ID }}\"  \\\n
           -backend-config=\"tenant_id=${{ secrets.AZURE_AD_TENANT_ID }}\""
-      
-      - name: Terraform Validate
-        id: validate
-        run: terraform validate -no-color
 
-      - name: Terraform Plan
-        id: plan
-        run: terraform plan ${{ inputs.terraform_args }} -input=false
-        continue-on-error: true
+      - name: Get Terraform plan
+        uses: actions/download-artifact@v3
+        with:
+          name: ${{ github.sha }}.tfplan
 
       - name: Terraform Apply
         if: github.ref == 'refs/heads/main'
-        run: terraform apply ${{ inputs.terraform_args }} -auto-approve -input=false
+        run: terraform apply ${{ inputs.terraform_args }} -input=false ${{ github.sha }}.tfplan
