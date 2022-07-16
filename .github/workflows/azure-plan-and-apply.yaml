@@ -69,7 +69,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: ${{ github.sha }}.tfplan
-          path: ${{ github.sha }}.tfplan
+          path: ${{ inputs.working_directory }}
 
   apply:
     needs: 
@@ -87,6 +87,7 @@ jobs:
     defaults:
       run:
         shell: bash
+        working-directory: ${{ inputs.working_directory }}
 
     steps:
       - name: Checkout
@@ -118,6 +119,7 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: ${{ github.sha }}.tfplan
+          path: ${{ inputs.working_directory }}
 
       - name: Terraform Apply
         if: github.ref == 'refs/heads/main'
