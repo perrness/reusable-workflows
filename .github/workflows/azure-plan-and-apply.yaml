@@ -52,7 +52,7 @@ jobs:
 
       - name: Terraform Init with default key
         if: ${{ inputs.default_storage_key }}
-        id: init
+        id: initDefaultKey
         run: "terraform init ${{ inputs.terraform_args }} \\\n 
           -backend-config=\"resource_group_name=${{ secrets.AZURE_BACKEND_RESOURCE_GROUP_NAME }}\" \\\n
           -backend-config=\"storage_account_name=${{ secrets.AZURE_BACKEND_STORAGE_ACCOUNT_NAME }}\" \\\n
@@ -64,7 +64,7 @@ jobs:
 
       - name: Terraform Init with custom key
         if: ${{ !inputs.default_storage_key }}
-        id: init
+        id: initCustomKey
         run: "terraform init ${{ inputs.terraform_args }} \\\n 
           -backend-config=\"resource_group_name=${{ secrets.AZURE_BACKEND_RESOURCE_GROUP_NAME }}\" \\\n
           -backend-config=\"storage_account_name=${{ secrets.AZURE_BACKEND_STORAGE_ACCOUNT_NAME }}\" \\\n
@@ -122,7 +122,7 @@ jobs:
 
       - name: Terraform Init with default key
         if: ${{ inputs.default_storage_key }}
-        id: init
+        id: initDefaultKey
         run: "terraform init ${{ inputs.terraform_args }} \\\n 
           -backend-config=\"resource_group_name=${{ secrets.AZURE_BACKEND_RESOURCE_GROUP_NAME }}\" \\\n
           -backend-config=\"storage_account_name=${{ secrets.AZURE_BACKEND_STORAGE_ACCOUNT_NAME }}\" \\\n
@@ -134,7 +134,7 @@ jobs:
 
       - name: Terraform Init with custom key
         if: ${{ !inputs.default_storage_key }}
-        id: init
+        id: initCustomKey
         run: "terraform init ${{ inputs.terraform_args }} \\\n 
           -backend-config=\"resource_group_name=${{ secrets.AZURE_BACKEND_RESOURCE_GROUP_NAME }}\" \\\n
           -backend-config=\"storage_account_name=${{ secrets.AZURE_BACKEND_STORAGE_ACCOUNT_NAME }}\" \\\n
