@@ -119,6 +119,7 @@ jobs:
         uses: actions/download-artifact@v3
         with:
           name: ${{ github.sha }}.tfplan
+          path: ${{ inputs.working_directory }}
 
       - name: Terraform Apply
         if: github.ref == 'refs/heads/main'
