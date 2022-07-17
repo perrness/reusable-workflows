@@ -51,8 +51,8 @@ jobs:
         if: ${{ inputs.use_kube_login }}
         run: |
           curl -LO https://github.com/Azure/kubelogin/releases/download/v0.0.15/kubelogin-linux-amd64.zip
-          sudo unzip -j kubelogin-linux-amd64.zip -d /usr/local/bin
-          sudo mv bin/linux_amd64/kubelogin /usr/bin
+          sudo unzip -j kubelogin-linux-amd64.zip -d /usr/bin
+          rm -f kubelogin-linux-amd64.zip
 
       - name: 'Az CLI login'
         uses: azure/login@v1
@@ -127,8 +127,8 @@ jobs:
         if: ${{ inputs.use_kube_login }}
         run: |
           curl -LO https://github.com/Azure/kubelogin/releases/download/v0.0.15/kubelogin-linux-amd64.zip
-          sudo unzip -j kubelogin-linux-amd64.zip -d /usr/local/bin
-          sudo mv bin/linux_amd64/kubelogin /usr/bin
+          sudo unzip -j kubelogin-linux-amd64.zip -d /usr/bin
+          rm -f kubelogin-linux-amd64.zip
 
       - name: 'Az CLI login'
         uses: azure/login@v1
