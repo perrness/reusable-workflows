@@ -47,28 +47,19 @@ jobs:
         id: fmt
         run: terraform fmt -check
 
+      - name: Set up kubelogin for non-interactive login
+        if: ${{ inputs.use_kube_login }}
+        run: |
+          curl -LO https://github.com/Azure/kubelogin/releases/download/v0.0.15/kubelogin-linux-amd64.zip
+          sudo unzip -j kubelogin-linux-amd64.zip -d /usr/local/bin
+          sudo mv bin/linux_amd64/kubelogin /usr/bin
+
       - name: 'Az CLI login'
         uses: azure/login@v1
         with:
           client-id: ${{ secrets.AZURE_AD_CLIENT_ID }}
           tenant-id: ${{ secrets.AZURE_AD_TENANT_ID }}
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-
-      - name: Set up kubelogin for non-interactive login
-        if: ${{ inputs.use_kube_login }}
-        run: |
-          curl -LO https://github.com/Azure/kubelogin/releases/download/v0.0.9/kubelogin-linux-amd64.zip
-          sudo unzip -j kubelogin-linux-amd64.zip -d /usr/local/bin
-          rm -f kubelogin-linux-amd64.zip
-          kubelogin --version
-
-      - uses: azure/aks-set-context@v2
-        if: ${{ inputs.use_kube_login }}
-        with:
-          resource-group: 'cheap-aks-rg'
-          cluster-name: 'cheap-aks'
-          admin: 'false'
-          use-kubelogin: 'true'
 
       - name: Terraform Init with default key
         if: ${{ inputs.default_storage_key }}
@@ -132,28 +123,19 @@ jobs:
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v2
 
+      - name: Set up kubelogin for non-interactive login
+        if: ${{ inputs.use_kube_login }}
+        run: |
+          curl -LO https://github.com/Azure/kubelogin/releases/download/v0.0.15/kubelogin-linux-amd64.zip
+          sudo unzip -j kubelogin-linux-amd64.zip -d /usr/local/bin
+          sudo mv bin/linux_amd64/kubelogin /usr/bin
+
       - name: 'Az CLI login'
         uses: azure/login@v1
         with:
           client-id: ${{ secrets.AZURE_AD_CLIENT_ID }}
           tenant-id: ${{ secrets.AZURE_AD_TENANT_ID }}
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-
-      - name: Set up kubelogin for non-interactive login
-        if: ${{ inputs.use_kube_login }}
-        run: |
-          curl -LO https://github.com/Azure/kubelogin/releases/download/v0.0.9/kubelogin-linux-amd64.zip
-          sudo unzip -j kubelogin-linux-amd64.zip -d /usr/local/bin
-          rm -f kubelogin-linux-amd64.zip
-          kubelogin --version
-
-      - uses: azure/aks-set-context@v2
-        if: ${{ inputs.use_kube_login }}
-        with:
-          resource-group: 'cheap-aks-rg'
-          cluster-name: 'cheap-aks'
-          admin: 'false'
-          use-kubelogin: 'true'
 
 
       - name: Terraform Init with default key
