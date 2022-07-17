@@ -11,6 +11,10 @@ on:
         required: false
         type: boolean
         default: true
+      use_kube_login:
+        required: false
+        type: boolean
+        default: false
       terraform_args:
         required: false
         type: string
@@ -49,6 +53,14 @@ jobs:
           client-id: ${{ secrets.AZURE_AD_CLIENT_ID }}
           tenant-id: ${{ secrets.AZURE_AD_TENANT_ID }}
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
+      - name: Set up kubelogin for non-interactive login
+        if: ${{ inputs.use_kube_login }}
+        run: |
+          curl -LO https://github.com/Azure/kubelogin/releases/download/v0.0.9/kubelogin-linux-amd64.zip
+          sudo unzip -j kubelogin-linux-amd64.zip -d /usr/local/bin
+          rm -f kubelogin-linux-amd64.zip
+          kubelogin --version
 
       - name: Terraform Init with default key
         if: ${{ inputs.default_storage_key }}
