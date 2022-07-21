@@ -6,7 +6,7 @@ on:
       working_directory:
         required: false
         type: string
-        default: ""
+        default: "."
       default_storage_key:
         required: false
         type: boolean
