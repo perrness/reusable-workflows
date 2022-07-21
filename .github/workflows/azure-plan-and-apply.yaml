@@ -22,7 +22,7 @@ on:
 jobs:
   plan:
     name: 'Plan'
-    environment: 'production'
+    environment: 'prod'
     env:
       ARM_CLIENT_ID: ${{ secrets.AZURE_AD_CLIENT_ID }}
       ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
@@ -95,7 +95,7 @@ jobs:
     needs: 
      - plan
     name: 'Apply'
-    environment: 'production'
+    environment: 'prod'
     env:
       ARM_CLIENT_ID: ${{ secrets.AZURE_AD_CLIENT_ID }}
       ARM_SUBSCRIPTION_ID: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
