@@ -154,5 +154,4 @@ jobs:
           path: ${{ inputs.working_directory }}
 
       - name: Terraform Apply
-        if: github.ref == 'refs/heads/main'
         run: terraform apply -input=false ${{ github.sha }}.tfplan
